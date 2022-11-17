@@ -3,9 +3,10 @@ import {
     Button,
     Dialog,
     DialogTitle,
-    TextField, DialogContent
+    TextField, DialogContent, IconButton, Grid
 } from "@mui/material";
 import {Dialog as D} from "./Dialog";
+import CloseIcon from '@mui/icons-material/Close';
 
 interface Props {
     openState:D,
@@ -21,7 +22,18 @@ export const TeacherSignup: React.FC<Props> = ({openState,settingState}) => {
     return (
         <>
             <Dialog open={openState==D.TeacherS} onClick={openClose}>
-                <DialogTitle>Login</DialogTitle>
+                <DialogTitle>
+                    <Grid container>
+                        <Grid item xs={11}>
+                            <h2>Teacher Sign Up</h2>
+                        </Grid>
+                        <Grid item xs={1}>
+                            <IconButton onClick={openClose}>
+                                <CloseIcon />
+                            </IconButton>
+                        </Grid>
+                    </Grid>
+                </DialogTitle>
                 <DialogContent>
                     <TextField
                         autoFocus
@@ -42,7 +54,6 @@ export const TeacherSignup: React.FC<Props> = ({openState,settingState}) => {
                         variant="standard"
                     />
                     <Button onClick={openClose}>Login</Button>
-                    <Button onClick={openClose}>Close</Button>
                 </DialogContent>
             </Dialog>
         </>
