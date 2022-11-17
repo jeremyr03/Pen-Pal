@@ -1,47 +1,34 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useMemo} from 'react';
 import Grid from '@mui/material/Grid'; // Grid version 2
 import {MenuBar} from "./components/MenuBar";
-import {Login} from "./components/Login"
+import {Dialog} from "./components/Login/Dialog";
 import {
-    Box, Button,
-    Container,
+    Box,
+    Button,
     CssBaseline,
-    PaletteColor,
     PaletteColorOptions,
     PaletteMode,
+    Stack,
     ThemeProvider,
-    useTheme
+    // useTheme
 } from "@mui/material";
-import {ThemeOptions, createTheme} from '@mui/material/styles';
-import {deepOrange, grey, teal, yellow} from "@mui/material/colors";
+import {createTheme} from '@mui/material/styles';
 import Typography from "@mui/material/Typography";
-
-// export const theme: ThemeOptions = createTheme({
-//     palette: {
-//         mode:"light",
-//         primary: {
-//             main: teal[600],
-//         },
-//         secondary: {
-//             main: yellow[500],
-//         },
-//         background: {
-//             default: grey[50],
-//             paper: deepOrange[50],
-//         },
-//     },
-// });
+import {TeacherSignup} from "./components/Login/TeacherSignup";
+import {TeacherLogin} from "./components/Login/TeacherLogin";
+import {StudentSignup} from "./components/Login/StudentSignup";
+import {StudentLogin} from "./components/Login/StudentLogin";
 
 export const App: React.FunctionComponent = () => {
     const [mode, setMode] = React.useState<'light' | 'dark'>('light');
+    const [dialog, setDialog] = React.useState<Dialog>(Dialog.empty);
 
-    const primary = ((mode === 'light') ? '#0b4f40' : '#81b29a');
-    const secondary = ((mode === 'light') ? '#e3b23c' : '#F03A47');
-    const background = ((mode === 'light') ? '#fafafa' : '#1c1c1c');
-    const background2 = ((mode === 'light') ? '#f4f1de' : '#424242');
+    // const primary = ((mode === 'light') ? '#0b4f40' : '#81b29a');
+    // const secondary = ((mode === 'light') ? '#e3b23c' : '#F03A47');
+    // const background = ((mode === 'light') ? '#fafafa' : '#1c1c1c');
+    // const background2 = ((mode === 'light') ? '#f4f1de' : '#424242');
 
-    const t = useTheme();
-
+    // Set themes
     const getDesignTokens = (mode: PaletteMode) => ({
         palette: {
             mode,
@@ -71,109 +58,79 @@ export const App: React.FunctionComponent = () => {
                         // default:'#1c1c1c',
                         // paper:'#424242',
                         // },
-
                     } as PaletteColorOptions
             ),
         },
     });
-
     // Update the theme only if the mode changes
     const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
-
-    // const theme: ThemeOptions = createTheme({
-    //     palette: {
-    //         // mode: mode,
-    //         primary: {
-    //             main: primary,
-    //         },
-    //         secondary: {
-    //             main: secondary,
-    //         },
-    //         background: {
-    //             default: background,
-    //             paper: background2,
-    //         },
-    //     },
-    // });
-
-    console.log(theme.palette)
-    // t.palette.mode = mode;
-    // theme.palette?.mode = mode;
-    // if (theme.palette) {
-    //     console.log(theme.palette)
-    //     theme.palette.mode = mode;
-    //     console.log(theme.palette)
-    // }
-
     const changeMode = () => {
         setMode(prevState => prevState === 'light' ? 'dark' : 'light')
     }
 
-    const buttonStyle = {
-        height:"10%",
-        width:"20%"
+    const settingDialog = (d:Dialog) => {
+      setDialog(d);
     }
 
-    const pageStyle = {
+    // clip-path: polygon(0 0,100% 0,100% 85%,0 100%); backgroundColor:"#81b29a",
 
-    }
+    const divStyle = {
+        backgroundColor: theme.palette.background.default,
+        paddingBottom:"10%",
+        clipPath:"polygon(0 0,100% 0,100% 85%,0 100%)"
+    };
 
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline/>
             <MenuBar changeMode={changeMode}/>
-            {/*<Box textAlign="center" width="100%">*/}
-            {/*    <Button variant="contained"> Teachers</Button>*/}
-            {/*    <Button variant="contained"> Students</Button>*/}
-            {/*</Box>*/}
+                <div style={divStyle}>
+                    <Grid container spacing={30} justifyContent="center" marginTop="1px">
+                        <Grid item>
+                            <Box>
+                                <Stack spacing={1}>
+                                    <Typography variant="h1" component="div" sx={{flexGrow: 1}} color="textPrimary">
+                                        Teachers
+                                    </Typography>
+                                    <Button variant="contained"
+                                            color="primary"
+                                            onClick={()=>{settingDialog(Dialog.TeacherS)}}>
+                                        Sign up
+                                    </Button>
+                                    <Button variant="outlined"
+                                            color="primary"
+                                            onClick={()=>{settingDialog(Dialog.TeacherL)}}>
+                                        Log in
+                                    </Button>
+                                    <TeacherSignup openState={dialog} settingState={settingDialog}/>
+                                    <TeacherLogin openState={dialog} settingState={settingDialog}/>
+                                </Stack>
+                            </Box>
+                        </Grid>
+                        <Grid item>
+                            <Box>
+                                <Stack spacing={1}>
+                                    <Typography variant="h1" component="div" sx={{flexGrow: 1}} color="textPrimary">
+                                        Students
+                                    </Typography>
+                                    <Button variant="contained"
+                                            color="primary"
+                                            onClick={()=>{settingDialog(Dialog.StudentS)}}>
+                                        Sign up
+                                    </Button>
+                                    <Button variant="outlined"
+                                            color="primary"
+                                            onClick={()=>{settingDialog(Dialog.StudentL)}}>
+                                        Log in
+                                    </Button>
+                                    <StudentSignup openState={dialog} settingState={settingDialog}/>
+                                    <StudentLogin openState={dialog} settingState={settingDialog}/>
+                                </Stack>
+                            </Box>
+                        </Grid>
+                    </Grid>
+            </div>
 
-            {/*</Container> justify="center"*/}
-            <Grid container spacing="100" justifyContent="center">
-                <Grid item>
-                    <Button variant="contained" color="primary">
-                        Main call to action
-                    </Button>
-                </Grid>
-                <Grid item>
-                    <Button variant="outlined" color="primary">
-                        Secondary action
-                    </Button>
-                </Grid>
-            </Grid>
-            {/*<div style={pageStyle}>*/}
-            {/*    <Button variant="contained" size="large" sx={buttonStyle}> Teachers Sign Up</Button>*/}
-            {/*    <Button variant="contained" size="large" sx={buttonStyle}> Teachers Log In</Button>*/}
-            {/*</div>*/}
-            {/*<Box width="100%" paddingTop="30%" alignContent="center">*/}
-            {/*    <Button variant="contained" size="large" sx={buttonStyle}> Teachers Sign Up</Button>*/}
-            {/*    <Button variant="contained" size="large" sx={buttonStyle}> Teachers Log In</Button>*/}
-            {/*</Box>*/}
-            {/*<Grid container spacing="2" paddingTop="50%">*/}
-            {/*    <Grid item xs={6} sx={{flexGrow: 1, textAlign: "center"}}>*/}
-            {/*        <Button variant="contained" size="large" sx={buttonStyle}> Teachers Sign Up</Button>*/}
-            {/*        <Button variant="contained" size="large" sx={buttonStyle}> Teachers Login In</Button>*/}
-            {/*    </Grid>*/}
-            {/*    <Grid item xs={6} sx={{flexGrow: 1, textAlign: "center"}}>*/}
-            {/*        <Button variant="contained" size="large" sx={buttonStyle}> Students Sign Up</Button>*/}
-            {/*        <Button variant="contained" size="large" sx={buttonStyle}> Students Log In</Button>*/}
-            {/*    </Grid>*/}
-            {/*    <Grid item xs={6} sx={{flexGrow: 1, textAlign: "center"}}>*/}
-            {/*        <Button variant="contained" size="large" sx={buttonStyle}> Teachers Sign Up</Button>*/}
-            {/*        <Button variant="contained" size="large" sx={buttonStyle}> Teachers Login In</Button>*/}
-            {/*    </Grid>*/}
-            {/*    <Grid item xs={6} sx={{flexGrow: 1, textAlign: "center"}}>*/}
-            {/*        <Button variant="contained" size="large" sx={buttonStyle}> Teachers Sign Up</Button>*/}
-            {/*        <Button variant="contained" size="large" sx={buttonStyle}> Teachers Login In</Button>*/}
-            {/*    </Grid>*/}
-                {/*<Button variant="contained"> Teachers</Button>*/}
-                {/*<Button variant="contained"> Students</Button>*/}
-                {/*<Typography variant="h6" component="div" sx={{ flexGrow: 1 }} color="primary">*/}
-                {/*    Primary*/}
-                {/*</Typography>*/}
-                {/*<Typography variant="h6" component="div" sx={{ flexGrow: 1 }} color="secondary">*/}
-                {/*    Secondary*/}
-                {/*</Typography>*/}
-            {/*</Grid>*/}
         </ThemeProvider>
     );
 };
