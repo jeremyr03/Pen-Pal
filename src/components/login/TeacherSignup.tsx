@@ -3,32 +3,34 @@ import {
     Button,
     Dialog,
     DialogTitle,
-    TextField, DialogContent, Grid, IconButton, useTheme
+    TextField,
+    DialogContent,
+    IconButton,
+    Grid,
+    useTheme,
 } from "@mui/material";
 import {EDialog as D} from "../../lib/EDialog";
-import CloseIcon from "@mui/icons-material/Close";
+import CloseIcon from '@mui/icons-material/Close';
 
 interface Props {
     openState:D,
     settingState:Function
 }
 
-export const StudentLogin: React.FC<Props> = ({openState,settingState}) => {
+export const TeacherSignup = ({openState,settingState}:Props):JSX.Element => {
     const theme = useTheme();
 
     const openClose = () => {
         settingState(D.empty);
     };
-
     return (
-        <>
-            <Dialog open={openState===D.StudentL}
+            <Dialog open={openState===D.TeacherS}
                     onClose={openClose}
                     PaperProps={{style:{backgroundColor:theme.palette.background.default}}}>
                 <DialogTitle>
                     <Grid container>
                         <Grid item xs={11}>
-                            <h2>Student Login</h2>
+                            <h2>Teacher Sign Up</h2>
                         </Grid>
                         <Grid item xs={1}>
                             <IconButton onClick={openClose}>
@@ -59,6 +61,5 @@ export const StudentLogin: React.FC<Props> = ({openState,settingState}) => {
                     <Button onClick={openClose}>Login</Button>
                 </DialogContent>
             </Dialog>
-        </>
     );
 }

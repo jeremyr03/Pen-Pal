@@ -13,7 +13,7 @@ interface Props {
     settingState:Function
 }
 
-export const TeacherLogin: React.FC<Props> = ({openState,settingState}) => {
+export const StudentLogin = ({openState,settingState}:Props):JSX.Element => {
     const theme = useTheme();
 
     const openClose = () => {
@@ -22,13 +22,13 @@ export const TeacherLogin: React.FC<Props> = ({openState,settingState}) => {
 
     return (
         <>
-            <Dialog open={openState===D.TeacherL}
+            <Dialog open={openState===D.StudentL}
                     onClose={openClose}
                     PaperProps={{style:{backgroundColor:theme.palette.background.default}}}>
                 <DialogTitle>
                     <Grid container>
                         <Grid item xs={11}>
-                            <h2>Teacher Login</h2>
+                            <h2>Student Login</h2>
                         </Grid>
                         <Grid item xs={1}>
                             <IconButton onClick={openClose}>

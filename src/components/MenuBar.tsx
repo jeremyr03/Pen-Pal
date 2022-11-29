@@ -24,6 +24,7 @@ export function MenuBar({changeMode}:Props) {
                     {theme.palette.mode === 'dark' ? <Brightness7Icon/> : <Brightness4Icon/>}
                 </IconButton>
             </Toolbar>
+            <a href="/api/auth/login">Login</a>
         </AppBar>
     );
 

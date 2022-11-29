@@ -13,7 +13,7 @@ interface Props {
     settingState:Function
 }
 
-export const StudentSignup: React.FC<Props> = ({openState,settingState}) => {
+export const TeacherLogin = ({openState,settingState}:Props):JSX.Element => {
     const theme = useTheme();
 
     const openClose = () => {
@@ -22,13 +22,13 @@ export const StudentSignup: React.FC<Props> = ({openState,settingState}) => {
 
     return (
         <>
-            <Dialog open={openState===D.StudentS}
+            <Dialog open={openState===D.TeacherL}
                     onClose={openClose}
                     PaperProps={{style:{backgroundColor:theme.palette.background.default}}}>
                 <DialogTitle>
                     <Grid container>
                         <Grid item xs={11}>
-                            <h2>Student Sign Up</h2>
+                            <h2>Teacher Login</h2>
                         </Grid>
                         <Grid item xs={1}>
                             <IconButton onClick={openClose}>
@@ -38,30 +38,15 @@ export const StudentSignup: React.FC<Props> = ({openState,settingState}) => {
                     </Grid>
                 </DialogTitle>
                 <DialogContent>
-                    <Grid container spacing={2}>
-                        <Grid item xs={6}>
-                            <TextField
-                                autoFocus
-                                margin="dense"
-                                id="code"
-                                label="Code"
-                                type="text"
-                                fullWidth
-                                variant="standard"
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <TextField
-                                autoFocus
-                                margin="dense"
-                                id="name"
-                                label="Email Address"
-                                type="text"
-                                fullWidth
-                                variant="standard"
-                            />
-                        </Grid>
-                    </Grid>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="name"
+                        label="Email Address"
+                        type="email"
+                        fullWidth
+                        variant="standard"
+                    />
                     <TextField
                         autoFocus
                         margin="dense"

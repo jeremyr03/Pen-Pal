@@ -76,6 +76,7 @@ export default function Home() {
     paddingBottom: "10%",
     clipPath: "polygon(0 0,100% 0,100% 85%,0 100%)"
   };
+
   return (
       <ThemeProvider theme={theme}>
         <CssBaseline/>
