@@ -9,7 +9,7 @@ import {
     Grid,
     useTheme,
 } from "@mui/material";
-import {EDialog as D} from "../../lib/EDialog";
+import {EDialog as D} from "../../utils/EDialog";
 import CloseIcon from '@mui/icons-material/Close';
 
 interface Props {

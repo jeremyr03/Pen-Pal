@@ -4,7 +4,7 @@ import {User} from "./entities/User";
 import {Message} from "./entities/Message";
 
 // Add to .env file
-export const AppDataSource = new DataSource({
+const AppDataSource = new DataSource({
     type: "postgres",
     host: "localhost",
     port: 5432,
@@ -23,3 +23,4 @@ AppDataSource.initialize()
     })
     .catch((error) => console.log(error))
 
+export {AppDataSource}

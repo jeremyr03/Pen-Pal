@@ -1,7 +1,7 @@
 import React, {useMemo} from 'react';
 import Grid from '@mui/material/Grid'; // Grid version 2
 import {MenuBar} from "../components/MenuBar";
-import {EDialog} from "../lib/EDialog";
+import {EDialog} from "../utils/EDialog";
 import {
     Box,
     Button, CircularProgress,

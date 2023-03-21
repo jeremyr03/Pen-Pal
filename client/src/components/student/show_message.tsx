@@ -1,8 +1,8 @@
 import {Button, Card, CardActions, CardContent, Grid} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import React from "react";
-import {IMessage} from "../../lib/interfaces/IMessage";
-import * as country from "../../lib/country_information.json";
+import {IMessage} from "../../utils/interfaces/IMessage";
+import * as country from "../../utils/country_information.json";
 
 export function ShowMessage(props: { msg: IMessage }) {
     let flag = "";

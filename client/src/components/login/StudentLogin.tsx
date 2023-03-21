@@ -5,7 +5,7 @@ import {
     DialogTitle,
     TextField, DialogContent, Grid, IconButton, useTheme
 } from "@mui/material";
-import {EDialog as D} from "../../lib/EDialog";
+import {EDialog as D} from "../../utils/EDialog";
 import CloseIcon from "@mui/icons-material/Close";
 import * as EmailValidator from 'email-validator';
 

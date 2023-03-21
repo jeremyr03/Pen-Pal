@@ -2,7 +2,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import React from "react";
 import {Paper} from "@mui/material";
-import {IMessage} from "../../lib/interfaces/IMessage";
+import {IMessage} from "../../utils/interfaces/IMessage";
 
 const paperStyle = {
     // backgroundColor: "#f8f8f8",
